@@ -49,11 +49,10 @@ const DISH = {
   styleUrls: ['./dishdetail.component.scss']
 })
 export class DishdetailComponent implements OnInit {
-  dish = DISH;
+ 
+   @Input()
+  dish: Dish;
   dishDetail = this.dish;
-  dishDetailComments = DISH.comments[0];
-  dishDetailComment = this.dish.comments;
-
   constructor() { }
 
   ngOnInit() {
