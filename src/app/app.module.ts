@@ -6,7 +6,7 @@ import {HttpModule} from '@angular/http';
 import { MatSelectModule, MatListModule, MatGridListModule , MatInputModule, MatSlideToggleModule ,
 MatToolbarModule , MatDialogModule , MatCardModule , MatButtonModule , MatSliderModule } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
-
+import { DishService } from './services/dish.service';
 import 'hammerjs';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -27,7 +27,7 @@ import { DishdetailComponent } from './dishdetail/dishdetail.component';
     MatToolbarModule , MatDialogModule , MatCardModule , MatButtonModule , MatSliderModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [DishService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
