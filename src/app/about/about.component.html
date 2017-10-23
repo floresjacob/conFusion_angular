@@ -55,12 +55,16 @@
 
 
       <div fxFlex>
-          <div *ngFor="let leader of leaders"  [routerLink]="['/shared', leader.id]">
-          <img style="border-radius: 100%; float: left" src={{leader.image}} alt={{leader.name}}>
-            <p>{{leader.name | uppercase}}, {{leader.abbr | uppercase}}</p>
-            <p>{{leader.designation}}</p>
-            <p>{{leader.description}}</p>
-          </div>
+        <md-list>
+            <md-list-item *ngFor="let leader of leaders">
+              <img md-list-avatar src="{{leader.image}}" alt="{{leader.name}}">
+              <p md-line>{{leader.name | uppercase}}, {{leader.abbr | uppercase}}</p>
+              <p md-line>{{leader.designation}}</p>
+              <p md-line>
+                <span>{{leader.description}}</span>
+              </p>
+          </md-list-item>
+        </md-list>
       </div>
 
 </div>
