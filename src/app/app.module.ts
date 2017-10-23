@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {
 MatSelectModule,
@@ -58,7 +59,8 @@ import { LoginComponent } from './login/login.component';
     MatSelectModule, MatListModule, MatGridListModule , MatInputModule, MatSlideToggleModule ,
     MatToolbarModule , MatDialogModule , MatCardModule , MatButtonModule , MatSliderModule, MdCheckboxModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [DishService, PromotionService, LeaderService],
   bootstrap: [AppComponent]
