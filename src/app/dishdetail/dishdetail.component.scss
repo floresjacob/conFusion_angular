@@ -1,0 +1,8 @@
+.layout-fill {  height: auto; }
+.layout-column {flex-direction: column;
+display: flex;
+width: 100%;}
+
+.layout-column > * {
+  width: 100%;
+}

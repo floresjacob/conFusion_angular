@@ -15,7 +15,7 @@ MatDialogModule,
 MatCardModule,
 MatButtonModule,
 MatSliderModule,
-MdCheckboxModule } from '@angular/material';
+MdCheckboxModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
