@@ -5,17 +5,19 @@ import {FormsModule} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {
-MatSelectModule,
-MatListModule,
-MatGridListModule,
-MatInputModule,
-MatSlideToggleModule,
-MatToolbarModule,
-MatDialogModule,
-MatCardModule,
-MatButtonModule,
-MatSliderModule,
-MdCheckboxModule} from '@angular/material';
+  MatSelectModule,
+  MatListModule,
+  MatGridListModule,
+  MatInputModule,
+  MatSlideToggleModule,
+  MatToolbarModule,
+  MatDialogModule,
+  MatCardModule,
+  MatButtonModule,
+  MatSliderModule,
+  MdCheckboxModule,
+  MatProgressSpinnerModule,
+} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
@@ -58,11 +60,16 @@ import { LoginComponent } from './login/login.component';
     HttpModule,
     MatSelectModule, MatListModule, MatGridListModule , MatInputModule, MatSlideToggleModule ,
     MatToolbarModule , MatDialogModule , MatCardModule , MatButtonModule , MatSliderModule, MdCheckboxModule,
+    MatProgressSpinnerModule,
     FlexLayoutModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [DishService, PromotionService, LeaderService],
+  providers: [
+    DishService,
+    PromotionService,
+    LeaderService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
