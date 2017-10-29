@@ -37,9 +37,9 @@
 <!--    <p>Display the list of comments here</p> -->
   <div layout="column" class="ng-scope layout-column" *ngIf="dish">
         <div flex class="flex">
-          <h3>{{'Comments'}}</h3>
 
             <md-card>
+              <md-card-title><h3>{{'Comments'}}</h3></md-card-title>
               <md-card-content>
                 <div class="md-list-item-text" *ngFor="let dish of dish.comments">
                   <i md-line>{{dish.comment}}</i>
@@ -59,6 +59,7 @@
 
           <div flex class="flex">
             <md-card>
+              <md-card-title><h3>{{'Give Us Your Opinion'}}</h3></md-card-title>
               <md-card-content>
                 <form name="commentForm" novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
                   <p>
