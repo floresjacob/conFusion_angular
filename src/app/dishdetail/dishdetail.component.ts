@@ -6,6 +6,7 @@ import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
+import { RestangularModule, Restangular } from 'ngx-restangular';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -22,6 +23,7 @@ export class DishdetailComponent implements OnInit {
   dishIds: number[];
   prev: number;
   next: number;
+  dishcopy = null;
 
   commentForm: FormGroup;
   comment: Comment;
@@ -41,6 +43,8 @@ export class DishdetailComponent implements OnInit {
     },
   };
 
+
+
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
     private location: Location,
@@ -53,8 +57,9 @@ export class DishdetailComponent implements OnInit {
        this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds,
        errmess => this.errMess = <any>errmess);
        this.route.params
-         .switchMap((params: Params) => this.dishservice.getDish(+params['id']))
-         .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+      .switchMap((params: Params) => { return this.dishservice.getDish(+params['id']); })
+      .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
+          errmess => { this.dish = null; this.errMess = <any>errmess; });
      }
 
      setPrevNext(dishId: number) {
@@ -104,11 +109,11 @@ export class DishdetailComponent implements OnInit {
     }
 
     onSubmit() {
-      var d = new Date();
-      var current = d.toISOString();
-      this.comment.date = current;
+      this.comment.date = new Date().toISOString();
       this.comment = this.commentForm.value;
-      this.dish.comments.push(this.comment);
+      // this.dish.comments.push(this.comment);
+      this.dishcopy.comments.push(this.comment);
+      this.dishcopy.save().subscribe(dish => { this.dish = dish; console.log(this.dish); });
       console.log(this.comment);
       this.commentForm.reset({
         rating: '',
@@ -120,9 +125,6 @@ export class DishdetailComponent implements OnInit {
 
 
 
+
     }
-
-
-
-
 }
