@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {HttpModule} from '@angular/http';
+import { baseURL } from './shared/baseurl';
 import {
   MatSelectModule,
   MatListModule,
@@ -24,6 +25,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
@@ -69,6 +71,8 @@ import { LoginComponent } from './login/login.component';
     DishService,
     PromotionService,
     LeaderService,
+    {provide: 'BaseURL', useValue: baseURL},
+    ProcessHTTPMsgService
   ],
   bootstrap: [AppComponent]
 })

@@ -13,7 +13,7 @@
           <h3>{{dish.name | uppercase}}</h3>
         </md-card-title>
       </md-card-header>
-      <img md-card-image src={{dish.image}} alt={{dish.name}}>
+      <img md-card-image src="{{BaseURL + dish.image}}" alt={{dish.name}}>
       <md-card-content>
         <p>{{dish.description}}
         </p>
@@ -46,11 +46,6 @@
                   <p>{{dish.rating}} Stars</p>
                   <p>-- {{dish.author}} {{dish.date | date : 'mediumDate'}}</p>
                 </div>
-                <div class="md-list-item-text" *ngIf="comment">
-                  <i md-line>{{comment.comment}}</i>
-                  <p>{{comment.rating}} Stars</p>
-                  <p>-- {{comment.author}} {{comment.date | date : 'mediumDate'}}</p>
-                </div>
               </md-card-content>
             </md-card>
 
@@ -59,6 +54,13 @@
 
           <div flex class="flex">
             <md-card>
+              <md-card-content>
+                <div class="md-list-item-text" *ngIf="comment">
+                  <i md-line>{{comment.comment}}</i>
+                  <p>{{comment.rating}} Stars</p>
+                  <p>-- {{comment.author}} {{comment.date | date : 'mediumDate'}}</p>
+                </div>
+              </md-card-content>
               <md-card-title><h3>{{'Give Us Your Opinion'}}</h3></md-card-title>
               <md-card-content>
                 <form name="commentForm" novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">

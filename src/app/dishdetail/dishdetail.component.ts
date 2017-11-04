@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import {Dish} from '../shared/dish';
-import {DISHES} from '../shared/dishes';
+// import {DISHES} from '../shared/dishes';
 import { DishService } from '../services/dish.service';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -43,9 +43,10 @@ export class DishdetailComponent implements OnInit {
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
     private location: Location,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    @Inject('BaseURL') private BaseURL) {
       this.createForm();
-     }
+    }
 
      ngOnInit() {
        this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
@@ -66,7 +67,7 @@ export class DishdetailComponent implements OnInit {
 
     createForm(): void {
       this.commentForm = this.fb.group({
-        rating: [5],
+        rating: [5, [Validators.required]],
         comment: ['', [Validators.required, Validators.minLength(2)] ],
         author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
         date:[''],
@@ -79,7 +80,6 @@ export class DishdetailComponent implements OnInit {
     }
 
     onValueChanged(data?: any) {
-
       if (!this.commentForm) { return; }
 
 
@@ -106,9 +106,10 @@ export class DishdetailComponent implements OnInit {
       var current = d.toISOString();
       this.comment.date = current;
       this.comment = this.commentForm.value;
+      this.dish.comments.push(this.comment);
       console.log(this.comment);
       this.commentForm.reset({
-        rating: 5,
+        rating: '',
         comment: '',
         author: '',
         date: '',
