@@ -9,6 +9,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class LeaderService {
@@ -18,22 +19,26 @@ export class LeaderService {
 
               getLeaders(): Observable<Leader[]> {
                   return this.http.get(baseURL + 'leaders')
-                                  .map(res => { return this.processHTTPMsgService.extractData(res); });
+                                  .map(res => { return this.processHTTPMsgService.extractData(res); })
+                                  .catch(error => { return this.processHTTPMsgService.handleError(error); });
                 }
 
                 getLeader(id: number): Observable<Leader> {
                   return  this.http.get(baseURL + 'leaders/'+ id)
-                                  .map(res => { return this.processHTTPMsgService.extractData(res); });
+                                  .map(res => { return this.processHTTPMsgService.extractData(res); })
+                                  .catch(error => { return this.processHTTPMsgService.handleError(error); });
                 }
 
                 getFeaturedLeader(): Observable<Leader> {
                   return this.http.get(baseURL + 'leaders?featured=true')
-                                  .map(res => { return this.processHTTPMsgService.extractData(res)[0]; });
+                                  .map(res => { return this.processHTTPMsgService.extractData(res)[0]; })
+                                  .catch(error => { return this.processHTTPMsgService.handleError(error); });
                 }
 
                 getLeaderAbbr(abbr: string): Observable<Leader> {
                   return  this.http.get(baseURL + 'leaders/'+ abbr)
-                                  .map(res => { return this.processHTTPMsgService.extractData(res); });
+                                  .map(res => { return this.processHTTPMsgService.extractData(res); })
+                                  .catch(error => { return this.processHTTPMsgService.handleError(error); });
                 }
 
 
