@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Dish } from '../shared/dish';
 // import { DISHES } from '../shared/dishes';
 import { DishService } from '../services/dish.service';
-
+import { flyInOut, expand } from '../animations/app.animation';
 
 
 
@@ -10,7 +10,16 @@ import { DishService } from '../services/dish.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
+  host: {
+   '[@flyInOut]': 'true',
+   '[@expand]': 'true',
+   'style': 'display: block;'
+   },
+   animations: [
+     flyInOut(),
+     expand()
+   ]
 })
 
 
