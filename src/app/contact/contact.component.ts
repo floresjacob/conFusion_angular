@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
+import { FeedbackService } from "../services/feedback.service";
 import { flyInOut } from '../animations/app.animation';
 
 
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-contact',
@@ -23,6 +25,9 @@ export class ContactComponent implements OnInit {
 
   feedbackForm: FormGroup;
   feedback: Feedback;
+  feedbackcopy: Feedback;
+  spinnerAndReviewFlag = false;
+
   contactType = ContactType;
   formErrors = {
     'firstname': '',
@@ -51,11 +56,14 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
-    this.createForm();
-  }
+  constructor(private feedbackservice: FeedbackService,
+    private fb: FormBuilder) {
+      this.createForm();
+    }
+
 
   ngOnInit() {
+
   }
 
   createForm(): void {
@@ -90,9 +98,17 @@ export class ContactComponent implements OnInit {
     }
   }
 
+
+
   onSubmit() {
     this.feedback = this.feedbackForm.value;
     console.log(this.feedback);
+
+    this.feedbackservice.submitFeedback(this.feedback)
+      .subscribe(feedback => {
+        this.feedbackcopy = feedback;
+        setTimeout(() => {this.spinnerAndReviewFlag = false;}, 5000);  });
+
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
@@ -102,7 +118,6 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: ''
     });
-
   }
 
 }

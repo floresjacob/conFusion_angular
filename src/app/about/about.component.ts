@@ -23,6 +23,7 @@ import { flyInOut, expand } from '../animations/app.animation';
 export class AboutComponent implements OnInit {
 
   leaders: Leader[] = LEADERS;
+  leadsErrMess: string;
 
   constructor(private leaderService: LeaderService,
   @Inject('BaseURL') private BaseURL) { }
